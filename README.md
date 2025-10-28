@@ -19,6 +19,7 @@ Built using Flask, Socket.IO, and Chart.js, the project continuously collects sy
 - Version Control -> Git and GitHub
 
 # Folder Structure : 
+```bash
 real-time-system-dashboard/
 │
 ├── app.py                  # Main Flask + SocketIO app
@@ -31,23 +32,14 @@ real-time-system-dashboard/
 ├── requirements.txt         # Dependencies
 ├── .gitignore               # Ignore files and folders
 └── README.md                # Project documentation
-
+```
 # Architecture : 
- ┌──────────────────────────────┐
- │          Frontend            │
- │  (HTML + JS + Chart.js)      │
- │  ↓ Receives live data        │
- └────────────┬─────────────────┘
-              │ WebSocket (Socket.IO)
- ┌────────────┴─────────────────┐
- │           Backend            │
- │  Flask + Flask-SocketIO      │
- │  → Gathers system stats via  │
- │    psutil                    │
- │  → Emits JSON every second   │
- └────────────┬─────────────────┘
-              │
- ┌────────────┴─────────────────┐
- │           System             │
- │  CPU, Memory, Disk, Network  │
- └──────────────────────────────┘
+ ```mermaid
+flowchart TD
+    A[System Metrics: CPU, RAM, Disk, Network] --> B[Health Monitor Engine]
+    B -->|Stores| C[Database/CSV Logs]
+    B -->|Checks Thresholds| D[Alerting System]
+    D -->|Sends| E[Console / Email / Notification]
+    C --> F[Visualization Module]
+```
+
